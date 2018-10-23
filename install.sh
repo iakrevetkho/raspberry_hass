@@ -1,23 +1,8 @@
 #!/usr/bin/env sh
 
-# remove old docker versions
-sudo apt-get remove docker docker-engine docker.io
+# install docker
+curl -sSL https://get.docker.com | sh
 
-# Install packages to allow apt to use a repository over HTTPS:
-sudo apt-get update -y
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
-
-# Add Docker’s official GPG key:
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-# Add docker repo:
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" -y
-
-#Update the apt package index
-sudo apt-get update -y
-
-# Install docker-ce:
-sudo apt-get install docker.io -y
 
 # Delete all previously containers
 sudo docker rm $(sudo docker ps -a -q) -f
