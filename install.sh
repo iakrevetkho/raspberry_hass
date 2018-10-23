@@ -23,10 +23,11 @@ sudo docker run -d -p 1000:9000 --restart=always -v /var/run/docker.sock:/var/ru
 sudo docker run -d -p 1001:8080 --restart=always google/cadvisor
 
 # Deploy Node-Red
-sudo docker run -d -p 1002:1880 --restart=always --name Node-Red nodered/node-red-docker
+#sudo docker run -d -p 1002:1880 --restart=always --name Node-Red nodered/node-red-docker
 
 # Deploy Swagger Editor
-sudo docker run -d -p 1003:8080 --restart=always swaggerapi/swagger-editor
+#sudo docker run -d -p 1003:8080 --restart=always swaggerapi/swagger-editor
 
 # Deploy Home Assistance
-sudo docker run -d -p 2000:8123 homeassistant/raspberrypi3-homeassistant
+# sudo docker run -d -p 2000:8123 homeassistant/raspberrypi3-homeassistant
+ sudo curl -sL https://raw.githubusercontent.com/home-assistant/hassio-build/master/install/hassio_install | sudo bash -s -- -m raspberrypi3
