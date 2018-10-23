@@ -14,30 +14,19 @@ sudo docker rmi $(sudo docker images -q) -f
 # 1001 - cAdvisor
 # 1002 - Node-Red
 # 1003 - Swagger Editor
+# 2000 - Home Assistant
 
 # Deploy Portainer for easiest container management
 sudo docker run -d -p 1000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
+#Deploy cAdvisor for monitoring resources
+sudo docker run -d -p 1001:8080 --restart=always google/cadvisor
+
 # Deploy Node-Red
-sudo docker run -d -p 1002:1880 --network="thingsboard-docker_default" --restart=always --name Node-Red nodered/node-red-docker
+sudo docker run -d -p 1002:1880 --restart=always --name Node-Red nodered/node-red-docker
 
 # Deploy Swagger Editor
-sudo docker run -d -p 1003:8080 --network="thingsboard-docker_default" --restart=always swaggerapi/swagger-editor
-
-#Deploy cAdvisor for monitoring resources
-sudo docker run \
- --volume=/:/rootfs:ro \
- --volume=/var/run:/var/run:rw \
- --volume=/sys:/sys:ro \
- --volume=/var/lib/docker/:/var/lib/docker:ro \
- --volume=/dev/disk/:/dev/disk:ro \
- --publish=1001:8080 \
- --detach=true \
- --restart=always \
- --name=cadvisor \
- google/cadvisor:latest
+sudo docker run -d -p 1003:8080 --restart=always swaggerapi/swagger-editor
 
 # Deploy Home Assistance
-sudo docker run -d --name="home-assistant" \
-  -v /path/to/your/config:/config \
-  -v /etc/localtime:/etc/localtime:ro --net=host homeassistant/raspberrypi3-homeassistant
+sudo docker run -d -p 2000:8123 homeassistant/raspberrypi3-homeassistant
